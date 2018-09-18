@@ -18,13 +18,24 @@
       <file leaf-file-name="ajax-content.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ajax-content.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="22" column="107" lean-forward="false" selection-start-line="22" selection-start-column="107" selection-end-line="22" selection-end-column="107" />
+            <state relative-caret-position="225">
+              <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
               <folding>
-                <marker date="1537300965000" expanded="true" signature="1502:1597" ph="..." />
-                <marker date="1537300965000" expanded="true" signature="1507:1576" ph="..." />
-                <marker date="1537300965000" expanded="true" signature="1507:1597" ph="..." />
+                <marker date="1537301948000" expanded="true" signature="1764:1879" ph="..." />
+                <marker date="1537301948000" expanded="true" signature="1784:1879" ph="..." />
+                <marker date="1537301948000" expanded="true" signature="1789:1858" ph="..." />
+                <marker date="1537301948000" expanded="true" signature="1789:1879" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="audio.svg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/img/audio.svg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -81,6 +92,24 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ajax-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ajax-content" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -118,12 +147,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1537298558992</updated>
-      <workItem from="1537298570902" duration="2170000" />
+      <workItem from="1537298570902" duration="3038000" />
     </task>
+    <task id="LOCAL-00001" summary="Fix loader width">
+      <created>1537300978954</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1537300978979</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fix loader color">
+      <created>1537301522269</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1537301522270</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2170000" />
+    <option name="totallyTimeSpent" value="3038000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -155,19 +199,18 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Fix loader width" />
+    <MESSAGE value="Fix loader color" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix loader color" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/img/audio.svg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/img/oval.svg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -176,14 +219,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/img/audio.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ajax-content.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="22" column="107" lean-forward="false" selection-start-line="22" selection-start-column="107" selection-end-line="22" selection-end-column="107" />
+        <state relative-caret-position="225">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
           <folding>
-            <marker date="1537300965000" expanded="true" signature="1502:1597" ph="..." />
-            <marker date="1537300965000" expanded="true" signature="1507:1576" ph="..." />
-            <marker date="1537300965000" expanded="true" signature="1507:1597" ph="..." />
+            <marker date="1537301948000" expanded="true" signature="1764:1879" ph="..." />
+            <marker date="1537301948000" expanded="true" signature="1784:1879" ph="..." />
+            <marker date="1537301948000" expanded="true" signature="1789:1858" ph="..." />
+            <marker date="1537301948000" expanded="true" signature="1789:1879" ph="..." />
           </folding>
         </state>
       </provider>

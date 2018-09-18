@@ -18,7 +18,7 @@ jQuery(function () {
 
         var $t = jQuery(this);
 
-        var $loaderImage = $ajaxContent.loaders.oval;
+        var $loaderImage = $ajaxContent.loaders[$ajaxContent.utils.hasAttr($t, 'data-loader-image') ? $t.attr('data-loader-image') : 'oval'];
         var $loaderColor = $ajaxContent.utils.hasAttr($t, 'data-loader-color') ? $t.attr('data-loader-color') : '#fff';
         $loaderImage = $loaderImage.replace(/{color}/g, $loaderColor);
         var $loaderHeight = $ajaxContent.utils.hasAttr($t, 'data-loader-height') ? $t.attr('data-loader-height') : '200px';
