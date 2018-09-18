@@ -20,12 +20,12 @@ jQuery(function () {
 
         var $loaderImage = $ajaxContent.loaders.oval;
         var $loaderHeight = $ajaxContent.utils.hasAttr($t, 'data-loader-height') ? $t.attr('data-loader-height') : '200px';
-        var $loaderWidth = $ajaxContent.utils.hasAttr($t, 'data-loader-height') ? $t.attr('data-loader-height') : '100%';
+        var $loaderWidth = $ajaxContent.utils.hasAttr($t, 'data-loader-width') ? $t.attr('data-loader-width') : '100%';
         var $maxRetry = $ajaxContent.utils.hasAttr($t, 'data-max-retry') ? parseInt($t.attr('data-max-retry')) : 5;
 
         $t.empty();
 
-        var $loaderHtml = '<div class="ajax-content-loader" style="line-height: ' + $loaderHeight + '; height: ' + $loaderHeight + '; width: ' + $loaderWidth + ';">' + $loaderImage + '</div>';
+        var $loaderHtml = '<div class="ajax-content-loader" style="text-align: center; line-height: ' + $loaderHeight + '; height: ' + $loaderHeight + '; width: ' + $loaderWidth + ';">' + $loaderImage + '</div>';
 
         $t.html($loaderHtml);
 
