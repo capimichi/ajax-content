@@ -1,53 +1,74 @@
-jQuery(function () {
-    var $ajaxContent = {};
-    $ajaxContent.loaders = {
-        oval: '<!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL --> <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="{color}"> <g fill="none" fill-rule="evenodd"> <g transform="translate(1 1)" stroke-width="2"> <circle stroke-opacity=".5" cx="18" cy="18" r="18"/> <path d="M36 18c0-9.94-8.06-18-18-18"> <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/> </path> </g> </g> </svg>'
-    };
-    $ajaxContent.utils = {};
-    $ajaxContent.functions = {};
+var ajaxContent = {};
 
-    $ajaxContent.utils.hasAttr = function ($obj, $attrName) {
-        var $attr = $obj.attr($attrName);
-        if (typeof $attr !== typeof undefined && $attr !== false) {
-            return true;
-        }
-        return false;
+ajaxContent.functions = {};
+
+ajaxContent.functions.collectOptions = function ($item) {
+    var $options = {
+        ajaxContentUrl: null,
+        ajaxContentErrorClass: 'error',
+        ajaxContentLoadClass: 'loading',
+        ajaxContentLoadEvent: 'load',
+        ajaxContentRetry: 3,
+        ajaxContentResponseType: 'content',
+        ajaxContentResponseContentField: 'content'
     };
+    jQuery.extend($options, $item.data());
+    return $options;
+};
+
+ajaxContent.functions.loadContent = function ($item, $options) {
+    $item.addClass($options.ajaxContentLoadClass);
+    var $retries = 0;
+    ajaxContent.functions.loadContent.load = function () {
+        jQuery.ajax({
+            url: $options.ajaxContentUrl,
+            success: function ($response) {
+                if ($options.ajaxContentResponseType === "content") {
+                    $item.html($response);
+                }
+                if ($options.ajaxContentResponseType === "json") {
+                    $item.html($response[$options.ajaxContentResponseContentField]);
+                }
+                $item.removeClass($options.ajaxContentLoadClass);
+                $item.trigger('loaded', [
+                    $response
+                ]);
+            },
+            error: function ($response) {
+                if ($retries < $options.ajaxContentRetry) {
+                    $retries++;
+                    ajaxContent.functions.loadContent.load();
+                } else {
+                    $item.removeClass($options.ajaxContentLoadClass);
+                    $item.addClass($options.ajaxContentErrorClass);
+                    $item.trigger('error', [
+                        $response
+                    ]);
+                }
+            }
+        });
+    };
+    $item.trigger('loading');
+    ajaxContent.functions.loadContent.load();
+};
+
+jQuery(function ($) {
+
+    $.fn.ajaxLoad = function () {
+        var $t = jQuery(this);
+        var $options = ajaxContent.functions.collectOptions($t);
+        ajaxContent.functions.loadContent($t, $options);
+    };
+
 
     jQuery(".ajax-content").each(function () {
 
         var $t = jQuery(this);
 
-        var $loaderImage = $ajaxContent.loaders[$ajaxContent.utils.hasAttr($t, 'data-loader-image') ? $t.attr('data-loader-image') : 'oval'];
-        var $loaderColor = $ajaxContent.utils.hasAttr($t, 'data-loader-color') ? $t.attr('data-loader-color') : '#fff';
-        $loaderImage = $loaderImage.replace(/{color}/g, $loaderColor);
-        var $loaderHeight = $ajaxContent.utils.hasAttr($t, 'data-loader-height') ? $t.attr('data-loader-height') : '200px';
-        var $loaderWidth = $ajaxContent.utils.hasAttr($t, 'data-loader-width') ? $t.attr('data-loader-width') : '100%';
-        var $maxRetry = $ajaxContent.utils.hasAttr($t, 'data-max-retry') ? parseInt($t.attr('data-max-retry')) : 5;
+        var $options = ajaxContent.functions.collectOptions($t);
 
-        $t.empty();
-
-        var $loaderHtml = '<div class="ajax-content-loader" style="text-align: center; line-height: ' + $loaderHeight + '; height: ' + $loaderHeight + '; width: ' + $loaderWidth + ';">' + $loaderImage + '</div>';
-
-        $t.html($loaderHtml);
-
-        $ajaxContent.functions.loadContent = function ($object) {
-
-            var $url = $t.attr('data-ajax-url');
-
-            if ($maxRetry > 0) {
-                $maxRetry--;
-                jQuery.ajax({
-                    url: $url,
-                    error: function () {
-                        $ajaxContent.functions.loadContent($object);
-                    }
-                }).done(function ($response) {
-                    $object.html($response);
-                });
-            }
-        };
-
-        $ajaxContent.functions.loadContent($t);
+        if ($options.ajaxContentLoadEvent === "load") {
+            ajaxContent.functions.loadContent($t, $options);
+        }
     });
 });
