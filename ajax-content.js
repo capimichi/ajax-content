@@ -31,6 +31,7 @@ ajaxContent.functions.loadContent = function ($item, $options) {
                 }
                 $item.removeClass($options.ajaxContentLoadClass);
                 $item.trigger('loaded', [
+                    $item,
                     $response
                 ]);
             },
@@ -42,13 +43,16 @@ ajaxContent.functions.loadContent = function ($item, $options) {
                     $item.removeClass($options.ajaxContentLoadClass);
                     $item.addClass($options.ajaxContentErrorClass);
                     $item.trigger('error', [
+                        $item,
                         $response
                     ]);
                 }
             }
         });
     };
-    $item.trigger('loading');
+    $item.trigger('loading', [
+        $item
+    ]);
     ajaxContent.functions.loadContent.load();
 };
 
