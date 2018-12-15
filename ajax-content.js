@@ -2,6 +2,12 @@ var ajaxContent = {};
 
 ajaxContent.functions = {};
 
+/**
+ * Get object content
+ *
+ * @param $item
+ * @returns {{ajaxContentUrl: null, ajaxContentErrorClass: string, ajaxContentLoadClass: string, ajaxContentLoadEvent: string, ajaxContentRetry: number, ajaxContentResponseType: string, ajaxContentResponseContentField: string}}
+ */
 ajaxContent.functions.collectOptions = function ($item) {
     var $options = {
         ajaxContentUrl: null,
@@ -10,12 +16,19 @@ ajaxContent.functions.collectOptions = function ($item) {
         ajaxContentLoadEvent: 'load',
         ajaxContentRetry: 3,
         ajaxContentResponseType: 'content',
-        ajaxContentResponseContentField: 'content'
+        ajaxContentResponseContentField: 'content',
+        ajaxContentButtonLoaderTemplate: '<div class="ajax-content" data-ajax-content-url="{url}"></div>',
+        ajaxContentButtonLocation: null,
     };
     jQuery.extend($options, $item.data());
     return $options;
 };
 
+/**
+ * Load Ajax content
+ * @param $item
+ * @param $options
+ */
 ajaxContent.functions.loadContent = function ($item, $options) {
     $item.addClass($options.ajaxContentLoadClass);
     var $retries = 0;
@@ -75,4 +88,26 @@ jQuery(function ($) {
             ajaxContent.functions.loadContent($t, $options);
         }
     });
+
+    jQuery("body").on("click", ".ajax-content-btn", function () {
+
+        var $t = jQuery(this);
+
+        var $options = ajaxContent.functions.collectOptions($t);
+
+        var $div = $options.ajaxContentButtonLoaderTemplate;
+
+        $div = $div.replace(/{url}/g, $options.ajaxContentUrl);
+
+        $div = jQuery($div);
+
+        if ($options.ajaxContentButtonLocation) {
+            jQuery($options.ajaxContentButtonLocation).append($div);
+        } else {
+            $t.after($div);
+        }
+
+        $div.ajaxLoad();
+    });
+
 });
