@@ -103,6 +103,8 @@ jQuery(function ($) {
 
         var $options = ajaxContent.functions.collectOptions($t);
 
+        console.log($options);
+
         var $div = $options.ajaxContentButtonLoaderTemplate;
 
         $div = $div
