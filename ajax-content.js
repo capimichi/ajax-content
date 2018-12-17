@@ -17,7 +17,7 @@ ajaxContent.functions.collectOptions = function ($item) {
         ajaxContentRetry: 3,
         ajaxContentResponseType: 'content',
         ajaxContentResponseContentField: 'content',
-        ajaxContentButtonLoaderTemplate: '<div class="ajax-content" data-ajax-content-url="{url}"></div>',
+        ajaxContentButtonLoaderTemplate: '<div class="ajax-content" data-ajax-content-url="{url}"><button class="ajax-content-close-btn" data-target="parent">Close</button><div class="ajax-content-inner">{content}</div></div>',
         ajaxContentButtonLocation: null,
     };
     jQuery.extend($options, $item.data());
@@ -36,11 +36,19 @@ ajaxContent.functions.loadContent = function ($item, $options) {
         jQuery.ajax({
             url: $options.ajaxContentUrl,
             success: function ($response) {
+
+                var $content = "";
+
                 if ($options.ajaxContentResponseType === "content") {
-                    $item.html($response);
+                    $content = $response;
                 }
                 if ($options.ajaxContentResponseType === "json") {
-                    $item.html($response[$options.ajaxContentResponseContentField]);
+                    $content = $response[$options.ajaxContentResponseContentField];
+                }
+                if ($item.html().match(/{content}/is)) {
+                    $item.html($item.html().replace(/{content}/g, $content));
+                } else {
+                    $item.html($content);
                 }
                 $item.removeClass($options.ajaxContentLoadClass);
                 $item.trigger('loaded', [
@@ -97,7 +105,9 @@ jQuery(function ($) {
 
         var $div = $options.ajaxContentButtonLoaderTemplate;
 
-        $div = $div.replace(/{url}/g, $options.ajaxContentUrl);
+        $div = $div
+            .replace(/{url}/g, $options.ajaxContentUrl)
+        ;
 
         $div = jQuery($div);
 
@@ -110,4 +120,15 @@ jQuery(function ($) {
         $div.ajaxLoad();
     });
 
+    jQuery("body").on("click", ".ajax-content-close-btn", function () {
+        var $t = jQuery(this);
+
+        var $targetName = $t.data("target");
+
+        if ($targetName === "parent") {
+            $t.parent().remove();
+        } else {
+            jQuery($targetName).remove();
+        }
+    });
 });
